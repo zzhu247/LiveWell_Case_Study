@@ -38,6 +38,32 @@ Data was cleaned and transformed using a custom-built preprocessing class (`WLID
 
 ---
 
+## 🔄 Preprocessing Pipeline
+
+To ensure consistency in both training and production, the preprocessing logic was encapsulated into a reusable pipeline. Here’s a conceptual overview:
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from wli_preprocessor import WLIDataPreprocessor  # Custom transformer
+
+# Custom + standard transformations
+preprocessing_pipeline = Pipeline([
+    ('custom_preprocessing', WLIDataPreprocessor()),
+    ('scaling', StandardScaler())
+])
+```
+
+This pipeline:
+- Cleans raw survey responses
+- Applies feature engineering (BMI, flags, counts)
+- Scales numeric features for modeling
+
+The same pipeline is used during training and inference to ensure consistent data transformation.
+
+---
+
 ## 🔍 Exploratory Analysis
 
 - Visualized BMI distribution to detect and remove outliers
@@ -126,4 +152,13 @@ seaborn
 - `Case_study.ipynb`: Main notebook with code and analysis
 - `README.md`: This file
 
+---
+
+## 👋 Acknowledgments
+
+Thanks to the anonymous dataset contributors and the medical reviewers who inspired the analysis goals.
+
+---
+
+Happy modeling! 🎉
 
